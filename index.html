@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -132,6 +132,297 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/06/event-loop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王晨">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangc个人博客">
+      <meta itemprop="description" content="个人知识总结 随笔 感想">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wangc个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/06/event-loop/" class="post-title-link" itemprop="url">事件循环(Event Loop)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-06 19:28:52" itemprop="dateCreated datePublished" datetime="2023-07-06T19:28:52+08:00">2023-07-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="现代浏览器中的事件循环"><a href="#现代浏览器中的事件循环" class="headerlink" title="现代浏览器中的事件循环"></a>现代浏览器中的事件循环</h2><h3 id="循环过程"><a href="#循环过程" class="headerlink" title="循环过程"></a>循环过程</h3><p>… -&gt; one macro task -&gt; all micro task -&gt; UI render -&gt; …</p>
+<h3 id="trigger"><a href="#trigger" class="headerlink" title="trigger"></a>trigger</h3><ul>
+<li>macro: setTimeout, setInterval, browser event handler</li>
+<li>micro: queueMicrotask, promise</li>
+</ul>
+<h2 id="Node中的事件循环"><a href="#Node中的事件循环" class="headerlink" title="Node中的事件循环"></a>Node中的事件循环</h2><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.javascript.info/event-loop">事件循环：微任务和宏任务</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Event_loop">并发模型与事件循环</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/06/react-render/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王晨">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangc个人博客">
+      <meta itemprop="description" content="个人知识总结 随笔 感想">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wangc个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/06/react-render/" class="post-title-link" itemprop="url">react渲染原理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-06 19:28:52" itemprop="dateCreated datePublished" datetime="2023-07-06T19:28:52+08:00">2023-07-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>react在渲染时解决了哪些问题？做了什么，怎样实现的？</li>
+<li>Fiber架构与老的stack架构区别是什么？</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><h3 id="触发渲染的流程"><a href="#触发渲染的流程" class="headerlink" title="触发渲染的流程"></a>触发渲染的流程</h3><p>EventTrigger -&gt; handler into task queue -&gt; call stack execute hanler -&gt; [update state, trigger effect, …] -&gt; react render</p>
+<h3 id="首次渲染-react-element-gt-VDOM-gt-DOM"><a href="#首次渲染-react-element-gt-VDOM-gt-DOM" class="headerlink" title="首次渲染 react element -&gt; VDOM -&gt; DOM"></a>首次渲染 react element -&gt; VDOM -&gt; DOM</h3><ul>
+<li>DOM节点: 通过Document.createElement创建真实DOM；递归遍历children属性，创建DOM节点。</li>
+<li>函数组件节点：调用函数，递归处理返回值。</li>
+<li>类组件节点：<ol>
+<li>constructor创建实例</li>
+<li>调用render,返回值 -&gt; VDOM树</li>
+<li>调用didMount方法</li>
+</ol>
+</li>
+<li>数组节点：遍历数组项并处理</li>
+</ul>
+<h3 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h3><ul>
+<li>组件更新：<ol>
+<li>shouldComponentUpdate</li>
+<li>render,得到新的VDOM树，与snapshot做对比更新</li>
+<li>didUpdate加入队列（应该是macroTaskQueue），等待将来执行</li>
+<li>重新生成VDOM树</li>
+<li>更新真实DOM</li>
+<li>执行队列，包括didMount，didUpdate，willUnMount</li>
+</ol>
+</li>
+</ul>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li>ReactElement: react元素，react对UI元素的抽象。组件实例与ReactElement对应，无论是类组件还是函数组件。</li>
+<li>VDOM Tree：虚拟节点，react在js运行时中对DOM树的抽象。react通过对比VNode Tree的快照，决定DOM的更新方式。</li>
+<li>Fiber: react新的架构，在框架层面对渲染机制做了优化。支持异步渲染。</li>
+<li>hooks：react通过hooks对函数组件的能力进行加强，使函数组件有自己的state、effect等特性。</li>
+<li>event loop: browser实现的事件驱动模型, 任务队列分为MicroTask和MaCroTask。</li>
+<li>调度算法：react更新UI的schedule</li>
+</ul>
+<h3 id="VDOM"><a href="#VDOM" class="headerlink" title="VDOM"></a>VDOM</h3><p>虚拟节点类型</p>
+<ul>
+<li>dom节点</li>
+<li>组件节点</li>
+<li>文本节点</li>
+<li>空节点  </li>
+<li>数组节点</li>
+</ul>
+<h2 id="运用及检验"><a href="#运用及检验" class="headerlink" title="运用及检验"></a>运用及检验</h2><ul>
+<li>描述react页面初次渲染时的过程。</li>
+<li>描述react页面更新过程，包括用户交互（点击）、网络请求等行为触发的更新。以及有多个state需要更新时的执行过程。</li>
+</ul>
+<h2 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h2><ul>
+<li>基于react渲染原理的性能优化方案<ol>
+<li>由于组件的render方法默认会递归的调用子组件的render函数，所以组件更新时应该尽可能只触发必要的render。</li>
+<li>基于react diff更新真实dom的算法，应该提高dom元素的复用率，比如数组元素加key，保持组件结构的稳定等。</li>
+</ol>
+</li>
+</ul>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7121378029682556958">「万字总结」🍒动画 + 大白话讲清楚React渲染原理</a></p>
+<p>  内容：</p>
+<ol>
+<li>类组件的生命周期有哪些，作用是什么</li>
+<li>react element是什么; VDOM节点类型有哪些？</li>
+<li>首次渲染过程；组件更新的步骤；</li>
+<li>diff方式及DOM更新的方式</li>
+</ol>
+<p>  问题：</p>
+<ol>
+<li>setState在react中是如何触发组件更新的？是同步还是异步，是否有batch处理？</li>
+<li>组件的render返回结果是否就是VDom子树？render是否会同步调用子组件的render方法，依赖子组件的render返回值？</li>
+<li>react是怎么保证didMount&#x2F;didUpdate方法在DOM更新以后执行的？</li>
+<li>react更新真实DOM的细节</li>
+</ol>
+</li>
+<li><p>event loop: todo add link</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/06/react-fiber/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王晨">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangc个人博客">
+      <meta itemprop="description" content="个人知识总结 随笔 感想">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wangc个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/06/react-fiber/" class="post-title-link" itemprop="url">react fiber 架构解析</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-06 19:28:52" itemprop="dateCreated datePublished" datetime="2023-07-06T19:28:52+08:00">2023-07-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/flex4gdzigdmjueq4orw">前端工程师的自我修养：React Fiber 是如何实现更新过程可控的</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904202267787277">React Fiber原理解析</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
