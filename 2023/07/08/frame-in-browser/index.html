@@ -19,27 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"wchfish.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="reference 前端工程师的自我修养：React Fiber 是如何实现更新过程可控的  内容：对fiber的概念没有解释清楚，文章中涉及的概念较多，但是感觉都没有很好的解释清楚，同时概念间的关联也不清晰。   问题：  2. 浏览器主线程（main thread）的事件驱动模型都做了什么？目前需要一个更为深入的心智模型来解释fiber架构 **** 参考浏览器的一帧  3. 什么是浏览器的刷">
+    <meta name="description" content="frame in browser 步骤 接受输入事件 js执行任务队列中的回调： 参考event loop 事件循环 开始一帧 RAF(requestAnimationFrame) Layout Paint RIC(RequestIdleCallback)  问题 “输入事件”这一步做了什么？ “开始一帧”这个概念的详解？ js中触发强制渲染的时候，执行流程是什么样的？ 一帧的整个流程都是同步的吗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react fiber 架构解析">
-<meta property="og:url" content="https://wchfish.github.io/2023/07/06/react-fiber/index.html">
+<meta property="og:title" content="浏览器的一帧">
+<meta property="og:url" content="https://wchfish.github.io/2023/07/08/frame-in-browser/index.html">
 <meta property="og:site_name" content="wangc个人博客">
-<meta property="og:description" content="reference 前端工程师的自我修养：React Fiber 是如何实现更新过程可控的  内容：对fiber的概念没有解释清楚，文章中涉及的概念较多，但是感觉都没有很好的解释清楚，同时概念间的关联也不清晰。   问题：  2. 浏览器主线程（main thread）的事件驱动模型都做了什么？目前需要一个更为深入的心智模型来解释fiber架构 **** 参考浏览器的一帧  3. 什么是浏览器的刷">
+<meta property="og:description" content="frame in browser 步骤 接受输入事件 js执行任务队列中的回调： 参考event loop 事件循环 开始一帧 RAF(requestAnimationFrame) Layout Paint RIC(RequestIdleCallback)  问题 “输入事件”这一步做了什么？ “开始一帧”这个概念的详解？ js中触发强制渲染的时候，执行流程是什么样的？ 一帧的整个流程都是同步的吗">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-07-06T11:28:52.909Z">
+<meta property="og:image" content="https://wchfish.github.io/images/frameInBrowser.png">
+<meta property="article:published_time" content="2023-07-08T03:21:17.708Z">
 <meta property="article:modified_time" content="2023-07-08T03:21:17.708Z">
 <meta property="article:author" content="王晨">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://wchfish.github.io/images/frameInBrowser.png">
 
 
-<link rel="canonical" href="https://wchfish.github.io/2023/07/06/react-fiber/">
+<link rel="canonical" href="https://wchfish.github.io/2023/07/08/frame-in-browser/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wchfish.github.io/2023/07/06/react-fiber/","path":"2023/07/06/react-fiber/","title":"react fiber 架构解析"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://wchfish.github.io/2023/07/08/frame-in-browser/","path":"2023/07/08/frame-in-browser/","title":"浏览器的一帧"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>react fiber 架构解析 | wangc个人博客</title>
+<title>浏览器的一帧 | wangc个人博客</title>
   
 
 
@@ -104,7 +106,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">1.</span> <span class="nav-text">reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#frame-in-browser"><span class="nav-number">1.</span> <span class="nav-text">frame in browser</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -145,7 +147,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/06/react-fiber/">
+    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/08/frame-in-browser/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -158,12 +160,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="react fiber 架构解析 | wangc个人博客">
+      <meta itemprop="name" content="浏览器的一帧 | wangc个人博客">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          react fiber 架构解析
+          浏览器的一帧
         </h1>
 
         <div class="post-meta-container">
@@ -174,14 +176,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-07-06 19:28:52" itemprop="dateCreated datePublished" datetime="2023-07-06T19:28:52+08:00">2023-07-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-08 11:21:17" itemprop="dateModified" datetime="2023-07-08T11:21:17+08:00">2023-07-08</time>
+      <time title="Created: 2023-07-08 11:21:17" itemprop="dateCreated datePublished" datetime="2023-07-08T11:21:17+08:00">2023-07-08</time>
     </span>
 
   
@@ -193,14 +188,24 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/flex4gdzigdmjueq4orw">前端工程师的自我修养：React Fiber 是如何实现更新过程可控的</a><br>  内容：对fiber的概念没有解释清楚，文章中涉及的概念较多，但是感觉都没有很好的解释清楚，同时概念间的关联也不清晰。</p>
-<p>  问题：<br>  2. 浏览器主线程（main thread）的事件驱动模型都做了什么？目前需要一个更为深入的心智模型来解释fiber架构 **** 参考<a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a><br>  3. 什么是浏览器的刷新频率，以及每一帧（frame）中浏览器都做了什么？**** 参考<a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a></p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904202267787277">React Fiber原理解析</a><br>  内容：对Fiber的作用和实现解释的不清楚</p>
-</li>
-<li><p><a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a></p>
-</li>
+    <div class="post-body" itemprop="articleBody"><h2 id="frame-in-browser"><a href="#frame-in-browser" class="headerlink" title="frame in browser"></a>frame in browser</h2><p><img src="/images/frameInBrowser.png" alt="一帧"></p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li>接受输入事件</li>
+<li>js执行任务队列中的回调： 参考<a href="https://wchfish.github.io/2023/07/06/event-loop/">event loop 事件循环</a></li>
+<li>开始一帧</li>
+<li>RAF(requestAnimationFrame)</li>
+<li>Layout</li>
+<li>Paint</li>
+<li>RIC(RequestIdleCallback)</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>“输入事件”这一步做了什么？</li>
+<li>“开始一帧”这个概念的详解？</li>
+<li>js中触发强制渲染的时候，执行流程是什么样的？</li>
+<li>一帧的整个流程都是同步的吗？</li>
+</ul>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://fe.ecool.fun/topic-answer/4585f639-0eff-4190-9fa0-e1c0838284e8?orderBy=updateTime&order=desc&tagId=10">浏览器一帧都会干些什么？</a></li>
 </ul>
 
     </div>
@@ -215,14 +220,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/07/05/hello-world/" rel="prev" title="Hello World">
-                  <i class="fa fa-chevron-left"></i> Hello World
+                <a href="/2023/07/06/event-loop/" rel="prev" title="事件循环(Event Loop)">
+                  <i class="fa fa-chevron-left"></i> 事件循环(Event Loop)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/07/06/react-render/" rel="next" title="react渲染原理">
-                  react渲染原理 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

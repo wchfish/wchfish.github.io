@@ -114,7 +114,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -132,6 +132,93 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://wchfish.github.io/2023/07/08/frame-in-browser/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="王晨">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="wangc个人博客">
+      <meta itemprop="description" content="个人知识总结 随笔 感想">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | wangc个人博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/07/08/frame-in-browser/" class="post-title-link" itemprop="url">浏览器的一帧</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-07-08 11:21:17" itemprop="dateCreated datePublished" datetime="2023-07-08T11:21:17+08:00">2023-07-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="frame-in-browser"><a href="#frame-in-browser" class="headerlink" title="frame in browser"></a>frame in browser</h2><p><img src="/images/frameInBrowser.png" alt="一帧"></p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ul>
+<li>接受输入事件</li>
+<li>js执行任务队列中的回调： 参考<a href="https://wchfish.github.io/2023/07/06/event-loop/">event loop 事件循环</a></li>
+<li>开始一帧</li>
+<li>RAF(requestAnimationFrame)</li>
+<li>Layout</li>
+<li>Paint</li>
+<li>RIC(RequestIdleCallback)</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>“输入事件”这一步做了什么？</li>
+<li>“开始一帧”这个概念的详解？</li>
+<li>js中触发强制渲染的时候，执行流程是什么样的？</li>
+<li>一帧的整个流程都是同步的吗？</li>
+</ul>
+<h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://fe.ecool.fun/topic-answer/4585f639-0eff-4190-9fa0-e1c0838284e8?orderBy=updateTime&order=desc&tagId=10">浏览器一帧都会干些什么？</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -391,6 +478,13 @@
 
       <time title="Created: 2023-07-06 19:28:52" itemprop="dateCreated datePublished" datetime="2023-07-06T19:28:52+08:00">2023-07-06</time>
     </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-07-08 11:21:17" itemprop="dateModified" datetime="2023-07-08T11:21:17+08:00">2023-07-08</time>
+    </span>
 
   
 </div>
@@ -403,8 +497,13 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/flex4gdzigdmjueq4orw">前端工程师的自我修养：React Fiber 是如何实现更新过程可控的</a></li>
-<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904202267787277">React Fiber原理解析</a></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/flex4gdzigdmjueq4orw">前端工程师的自我修养：React Fiber 是如何实现更新过程可控的</a><br>  内容：对fiber的概念没有解释清楚，文章中涉及的概念较多，但是感觉都没有很好的解释清楚，同时概念间的关联也不清晰。</p>
+<p>  问题：<br>  2. 浏览器主线程（main thread）的事件驱动模型都做了什么？目前需要一个更为深入的心智模型来解释fiber架构 **** 参考<a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a><br>  3. 什么是浏览器的刷新频率，以及每一帧（frame）中浏览器都做了什么？**** 参考<a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904202267787277">React Fiber原理解析</a><br>  内容：对Fiber的作用和实现解释的不清楚</p>
+</li>
+<li><p><a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a></p>
+</li>
 </ul>
 
       
