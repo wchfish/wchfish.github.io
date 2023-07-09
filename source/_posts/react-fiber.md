@@ -4,6 +4,26 @@ title: react fiber 架构解析
 
 ## 相关概念
 * MessageChannel
+* Fiber Node，Fiber Tree：根据react element生成，Fiber Tree通过对current和workInProgress做diff，更新VDOM。
+    
+    1. Fiber Node除了包含节点自身的信息外，还有子节点、兄弟节点、父节点的指针；Fiber Tree是一个链表结构。 
+
+    2. Fiber Tree的遍历基于DFS算法。
+
+    2. current fiber tree是上一次commit的快照，WrokInProgress fiber tree是当前在进行的更新。
+* schedule: react render等操作会生成task，由schedule负责调度。schedule的思想是控制事件循环中单次js调用的执行时间，保证浏览器每一帧在限制时间（16.6ms）内完成，这样就不会block用户交互以及其他高优先级的任务。
+    
+    1. task支持中断、恢复、终止。每个fiber节点是task执行时的最小单元(unit work)。
+    
+    2. 任务有TimerQueue和TaskQueue两个优先队列保存。TimeQueue sort key是startTime，TaskQueue sort key 是ExpirationTime。
+
+    3. 任务有优先级，schedule会优先执行高优任务。
+* react更新UI有2个阶段，render和commit。render是异步的，commit是同步的需要一次性完成。
+* 浏览器刷新率，一帧：react schedule依赖的基础。
+
+## 问题
+* react中schedule对应的task的详细内容，如task是怎么生成的，任务的优先级怎样确定等，任务在执行阶段做了什么？
+* react element、Fiber节点、VDOM节点之间的关系是什么？
 
 ## reference
 * [前端工程师的自我修养：React Fiber 是如何实现更新过程可控的](https://www.infoq.cn/article/flex4gdzigdmjueq4orw)
