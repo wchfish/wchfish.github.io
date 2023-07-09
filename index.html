@@ -419,7 +419,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-09 11:48:52" itemprop="dateModified" datetime="2023-07-09T11:48:52+08:00">2023-07-09</time>
+      <time title="Modified: 2023-07-09 16:03:48" itemprop="dateModified" datetime="2023-07-09T16:03:48+08:00">2023-07-09</time>
     </span>
 
   
@@ -433,7 +433,36 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
-<li>MessageChannel</li>
+<li><p>MessageChannel</p>
+</li>
+<li><p>Fiber Node，Fiber Tree：根据react element生成，Fiber Tree通过对current和workInProgress做diff，更新VDOM。</p>
+<ol>
+<li><p>Fiber Node除了包含节点自身的信息外，还有子节点、兄弟节点、父节点的指针；Fiber Tree是一个链表结构。 </p>
+</li>
+<li><p>Fiber Tree的遍历基于DFS算法。</p>
+</li>
+<li><p>current fiber tree是上一次commit的快照，WrokInProgress fiber tree是当前在进行的更新。</p>
+</li>
+</ol>
+</li>
+<li><p>schedule: react render等操作会生成task，由schedule负责调度。schedule的思想是控制事件循环中单次js调用的执行时间，保证浏览器每一帧在限制时间（16.6ms）内完成，这样就不会block用户交互以及其他高优先级的任务。</p>
+<ol>
+<li><p>task支持中断、恢复、终止。每个fiber节点是task执行时的最小单元(unit work)。</p>
+</li>
+<li><p>任务有TimerQueue和TaskQueue两个优先队列保存。TimeQueue sort key是startTime，TaskQueue sort key 是ExpirationTime。</p>
+</li>
+<li><p>任务有优先级，schedule会优先执行高优任务。</p>
+</li>
+</ol>
+</li>
+<li><p>react更新UI有2个阶段，render和commit。render是异步的，commit是同步的需要一次性完成。</p>
+</li>
+<li><p>浏览器刷新率，一帧：react schedule依赖的基础。</p>
+</li>
+</ul>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ul>
+<li>react中schedule对应的task的详细内容，如task是怎么生成的，任务的优先级怎样确定等，任务在执行阶段做了什么？</li>
+<li>react element、Fiber节点、VDOM节点之间的关系是什么？</li>
 </ul>
 <h2 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h2><ul>
 <li><p><a target="_blank" rel="noopener" href="https://www.infoq.cn/article/flex4gdzigdmjueq4orw">前端工程师的自我修养：React Fiber 是如何实现更新过程可控的</a></p>
