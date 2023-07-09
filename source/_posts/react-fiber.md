@@ -31,5 +31,30 @@ title: react fiber 架构解析
     问题：
         
         1. 任务队列、任务这些概念，以及中断等行为没有和react、宿主环境关联，所以术语显得很虚。
-        2. react的操作（setState, useState等）到task的映射方式是什么？
+
+        2. react的操作（setState, useState等）到task的映射方式是什么？浏览器事件处理到task的映射关系是什么？
+* [React 任务调度](https://xie.infoq.cn/article/dae49299746f3f3181f31b396): 写的比较好，思路清晰，行文流畅
+
+    内容：
+
+        1. jsx -> Fiber Tree的示例，fiber节点以及fiber tree的结构。
+
+        2. react15 stack vs react16 fiber的实际例子（没有说明示例做了什么），性能差异原因的简单分析。
+
+        3. 浏览器中一帧的概念，react基于帧的时间分片概念。
+
+        4. 任务调度：包括任务优先级，TimerQueue和TaskQueue；
+
+        5. 任务调度的示例。
+    
+    问题：
+        1. react中的时间分片概念详解，时间分片是如何提高UI渲染性能的？时间分片在减少阻塞的同时，是否可能导致单个任务的执行时间变长？由此会产生哪些负面影响？
+        
+        2. 有哪些典型的场景可以用于分析fiber的渲染流程？
+
+        3. 文章中的示例没有说清楚示例code是怎样执行的，很难对示例进行分析。
+
+        4. 当浏览器的一帧耗时小于16.6ms时（包括了IdleCallback的执行），是否会立即进入下一帧？盲猜会立即进入下一帧。
+
+        5. 任务优先级与用户交互事件的具体映射关系是什么？
 * [浏览器的一帧](https://wchfish.github.io/2023/07/08/frame-in-browser/)
