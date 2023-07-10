@@ -77,4 +77,15 @@ title: react fiber 架构解析
         4. 当浏览器的一帧耗时小于16.6ms时（包括了IdleCallback的执行），是否会立即进入下一帧？盲猜会立即进入下一帧。
 
         5. 任务优先级与用户交互事件的具体映射关系是什么？
+* [深入 React 源码揭开渲染更新流程的面纱](https://xie.infoq.cn/article/1bd419f5ce928fa12ab1d6a5c) ： 结合源码分析react渲染流程，文中源码较多，阅读时需要静下心思考。
+    
+    内容：
+        1. React15版本的架构分层。
+
+        2. React16版本的架构分层：Schedule, Reconciler, Renderer;
+
+        3. 基于渲染流程（初始render、setState）的源码分析。
+
+        4. Schedule、Reconciler、Renderer三层结构的源码分析。
 * [浏览器的一帧](https://wchfish.github.io/2023/07/08/frame-in-browser/)
+* [视频课程](https://xiaochen1024.com/series/60b1b600712e370039088e24/60b1b636712e370039088e25)
