@@ -27,7 +27,7 @@
 <meta property="og:description" content="相关概念 MessageChannel  Fiber Node，Fiber Tree：根据react element生成，Fiber Tree通过对current和workInProgress做diff，更新VDOM。  Fiber Node除了包含节点自身的信息外，还有子节点、兄弟节点、父节点的指针；Fiber Tree是一个链表结构。   Fiber Tree的遍历基于DFS算法。  curr">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-07-06T11:28:52.909Z">
-<meta property="article:modified_time" content="2023-07-09T08:03:48.207Z">
+<meta property="article:modified_time" content="2023-07-10T08:55:45.408Z">
 <meta property="article:author" content="王晨">
 <meta name="twitter:card" content="summary">
 
@@ -181,7 +181,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-09 16:03:48" itemprop="dateModified" datetime="2023-07-09T16:03:48+08:00">2023-07-09</time>
+      <time title="Modified: 2023-07-10 16:55:45" itemprop="dateModified" datetime="2023-07-10T16:55:45+08:00">2023-07-10</time>
     </span>
 
   
@@ -265,7 +265,12 @@
 </code></pre>
 <p>  问题：<br>  1. react中的时间分片概念详解，时间分片是如何提高UI渲染性能的？时间分片在减少阻塞的同时，是否可能导致单个任务的执行时间变长？由此会产生哪些负面影响？<br><br>  2. 有哪些典型的场景可以用于分析fiber的渲染流程？<br><br>  3. 文章中的示例没有说清楚示例code是怎样执行的，很难对示例进行分析。<br><br>  4. 当浏览器的一帧耗时小于16.6ms时（包括了IdleCallback的执行），是否会立即进入下一帧？盲猜会立即进入下一帧。<br><br>  5. 任务优先级与用户交互事件的具体映射关系是什么？</p>
 </li>
+<li><p><a target="_blank" rel="noopener" href="https://xie.infoq.cn/article/1bd419f5ce928fa12ab1d6a5c">深入 React 源码揭开渲染更新流程的面纱</a> ： 结合源码分析react渲染流程，文中源码较多，阅读时需要静下心思考。</p>
+<p>  内容：<br>  1. React15版本的架构分层。<br><br>  2. React16版本的架构分层：Schedule, Reconciler, Renderer;<br><br>  3. 基于渲染流程（初始render、setState）的源码分析。<br><br>  4. Schedule、Reconciler、Renderer三层结构的源码分析。</p>
+</li>
 <li><p><a href="https://wchfish.github.io/2023/07/08/frame-in-browser/">浏览器的一帧</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://xiaochen1024.com/series/60b1b600712e370039088e24/60b1b636712e370039088e25">视频课程</a></p>
 </li>
 </ul>
 
